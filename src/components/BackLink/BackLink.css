@@ -1,0 +1,30 @@
+.app-back-link {
+  display: inline-flex;
+  align-items: center;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.app-back-link:hover {
+  color: #4b5563;
+}
+
+.app-back-link {
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.app-back-link__icon {
+  display: inline-block;
+  color: inherit;
+}
+
+.app-back-link__label {
+  line-height: 1;
+}
