@@ -1,0 +1,35 @@
+.auth-social {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.auth-social__button {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 10px;
+  color: #655df4;
+  border: 1.5px solid #827cff;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.auth-social__button svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 420px) {
+  .auth-social {
+    grid-template-columns: 1fr;
+  }
+}
