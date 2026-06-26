@@ -23,7 +23,6 @@
     "@babel/core": "^7.29.7",
     "@commitlint/cli": "^21.1.0",
     "@commitlint/config-conventional": "^21.1.0",
-    "@oxlint/binding-darwin-x64": "^1.71.0",
     "@rolldown/plugin-babel": "^0.2.3",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.13.2",
@@ -37,5 +36,8 @@
     "prettier": "^3.8.4",
     "typescript": "~6.0.2",
     "vite": "^8.1.0"
+  },
+  "optionalDependencies": {
+    "@oxlint/binding-win32-x64-msvc": "^1.71.0"
   }
 }
