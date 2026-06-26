@@ -1,7 +1,7 @@
-import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 function App() {
-  return <ResetPassword />;
+  return <ForgotPassword />;
 }
 
 export default App;
