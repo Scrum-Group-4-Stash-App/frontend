@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./ForgotPassword.css";
 
-import BackLink from "../../components/BackLink";
-import Input from "../../components/Inputs";
-import Button from "../../components/Button";
-import { FaEnvelope } from "react-icons/fa6";
+import { AppRoutes } from "@/constants/routes";
 import { FaLock } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa6";
+import BackLink from "../../components/BackLink";
+import Button from "../../components/Button";
+import Input from "../../components/Inputs";
 import SuccessAlert from "../../components/SuccessAlert";
 
 const ForgotPassword = () => {
@@ -24,7 +25,7 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password-page">
       <div className="forgot-password-card">
-        <BackLink label="Reset Password" />
+        <BackLink label="Reset Password" href={AppRoutes.login} />
 
         {showSuccess && (
           <SuccessAlert
