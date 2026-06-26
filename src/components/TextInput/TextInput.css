@@ -6,7 +6,7 @@
 
 .app-text-input__label {
   color: #333946;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -46,7 +46,7 @@
   outline: 0;
   color: #252b35;
   background: transparent;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
 }
 

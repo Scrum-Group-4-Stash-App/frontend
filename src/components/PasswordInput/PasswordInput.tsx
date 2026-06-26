@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router";
 import "./PasswordInput.css";
 import type { PasswordInputProps } from "./PasswordInput.types";
 
@@ -88,9 +89,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
             </label>
           )}
           {forgotHref && (
-            <a className="app-password-input__forgot" href={forgotHref}>
+            <Link className="app-password-input__forgot" to={forgotHref}>
               {forgotLabel || "Forgot password?"}
-            </a>
+            </Link>
           )}
         </div>
       )}
