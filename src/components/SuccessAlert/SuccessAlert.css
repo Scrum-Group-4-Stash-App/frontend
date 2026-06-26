@@ -1,0 +1,16 @@
+.success-alert {
+  width: 100%;
+  background-color: #e8f8ee;
+  border: 1px solid #c7eed5;
+  border-left: 5px solid #28a745;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+}
+
+.success-alert p {
+  margin: 0;
+  color: #1e4620;
+  font-size: 14px;
+  line-height: 1.5;
+}

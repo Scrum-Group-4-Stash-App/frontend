@@ -1,96 +1,363 @@
-# STASH Web Application
+# Reset Password Feature
 
-STASH is a web-based platform for saving and organising resources, attaching notes and reminders, searching across saved content, and sharing collections with others.
+## Project Overview
 
-## Tech Stack
+This project implements the **Reset Password** user authentication flow for our healthcare web application. The feature was built using **React**, **TypeScript**, and reusable UI components to ensure consistency across all authentication screens.
 
-- React 19
-- Vite
+The implementation follows the approved Figma design and emphasizes component reusability, maintainability, and ease of integration with backend APIs.
+
+---
+
+# Feature Branch
+
+Development is being carried out on the following Git branch:
+
+```bash
+feat/resetpassword
+```
+
+This branch contains all components and pages related to the password reset flow.
+
+---
+
+# Technologies Used
+
+- React
 - TypeScript
-- Tailwind CSS 4
-- Axios
-- Lucide React
+- CSS
+- React Icons
+- Vite
 
-## Getting Started
+---
 
-### Prerequisites
+# Project Structure
 
-- Node.js 18 or later recommended
-- npm
+```
+src
+│
+├── components
+│   ├── BackLink
+│   ├── Button
+│   ├── Input
+│   ├── PasswordInput
+│   └── SuccessAlert
+│
+├── pages
+│   ├── ForgotPassword
+│   └── ResetPassword
+│
+├── App.tsx
+└── main.tsx
+```
 
-### Setup
+---
 
-1. Clone the repository.
+# Reusable Components
 
-   ```sh
-   git clone <repository-url>
-   cd stash-app
-   ```
+## 1. Button Component
 
-2. Install dependencies.
+A reusable button component used throughout the authentication pages.
 
-   ```sh
-   npm install
-   ```
+### Features
 
-3. Run the development server.
+- Supports different button types
+- Accepts child content
+- Optional icon support
+- Custom styling using CSS classes
 
-   ```sh
-   npm run dev
-   ```
+### Example
 
-   The app will be available at `http://localhost:5173` by default.
+```tsx
+<Button type="submit">Reset Password</Button>
+```
 
-4. Set up local environment values.
+With icon support:
 
-   A starter `.env.example` file is included in the repository. Copy it to `.env` and add any environment variables your app needs. Use `.env.example` to list the variable names only, without sensitive values. Any secrets, API keys, tokens, or other sensitive values should be stored in your local environment variables and never committed to the repository.
+```tsx
+<Button type="submit" icon={FaLock}>
+  Reset Password
+</Button>
+```
 
-   ```sh
-   cp .env.example .env
-   ```
+---
 
-## Available Scripts
+## 2. Input Component
 
-- `npm run dev`
-  - Starts the Vite development server.
+A reusable text input component.
 
-- `npm run build`
-  - Runs the TypeScript build and creates a production bundle.
+### Features
 
-- `npm run lint`
-  - Runs `oxlint`, a fast linter that checks for common code issues and style problems.
+- Label support
+- Placeholder support
+- Email input
+- Custom CSS styling
+- Optional icon support using React Icons
 
-- `npm run preview`
-  - Serves the production build locally for previewing.
+### Example
 
-- `npm run prepare`
-  - Sets up Husky Git hooks.
+```tsx
+<Input label="Email" type="email" placeholder="Enter your email" />
+```
 
-- `npm run test`
-  - Runs TypeScript type checking with `tsc --noEmit`.
+---
 
-## Commit Hooks
+## 3. PasswordInput Component
 
-This repository uses Husky, so commit checks run automatically.
+A reusable password field.
 
-## Commit Format
+### Features
 
-Commit messages must follow the Conventional Commits style.
+- Show/Hide password
+- Eye toggle icon
+- Password strength indicator (optional)
+- Remember Me checkbox (optional)
+- Forgot Password link (optional)
 
-- Allowed types include `feat`, `fix`, `chore`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, and `revert`
-- Keep the subject in lower-case
-- Keep the subject within 100 characters
+### Example
+
+```tsx
+<PasswordInput label="New Password" placeholder="Enter your new password" />
+```
+
+---
+
+## 4. BackLink Component
+
+A reusable navigation component placed at the top of authentication pages.
+
+### Features
+
+- Back arrow icon
+- Click handler support
+- Hyperlink support
 
 Example:
 
-```sh
-feat: add authentication form
+```tsx
+<BackLink label="Reset Password" />
 ```
 
-## Project Notes
+---
 
-- The project uses TypeScript for type safety.
-- Code quality checks are enforced with linting and type checking.
-- Husky is configured for repository hooks.
-- The `@` import alias points to the `src/` directory, so imports like `@/components/Button` resolve from `src/components/Button`.
-- The repository includes `.env.example` as a template for required environment variable names only, with no sensitive values.
+## 5. SuccessAlert Component
+
+A reusable alert component created for displaying successful operations.
+
+### Features
+
+- Green success notification
+- Custom message support
+- Easily reusable across the application
+
+Example:
+
+```tsx
+<SuccessAlert message="Password reset instructions have been sent." />
+```
+
+---
+
+# Pages Implemented
+
+## Forgot Password Page
+
+### Purpose
+
+Allows users to request password reset instructions by entering their registered email address.
+
+### Components Used
+
+- BackLink
+- Input
+- Button
+- SuccessAlert (in progress)
+
+### Features
+
+- Email validation input
+- Reset Password button
+- Placeholder support
+- Email icon
+- Displays success notification after submission (currently being integrated)
+
+---
+
+## Reset Password Page
+
+### Purpose
+
+Allows users to create a new password after following the reset link.
+
+### Components Used
+
+- BackLink
+- PasswordInput
+- Button
+
+### Features
+
+- New Password field
+- Confirm Password field
+- Password visibility toggle
+- Password confirmation validation
+- Reset Password button with icon
+
+---
+
+# State Management
+
+React's `useState` hook is currently used for local state management.
+
+Example:
+
+```tsx
+const [password, setPassword] = useState("");
+const [confirmPassword, setConfirmPassword] = useState("");
+```
+
+The success notification also uses local state:
+
+```tsx
+const [showSuccess, setShowSuccess] = useState(false);
+```
+
+---
+
+# Form Validation
+
+Current validation includes:
+
+- Preventing page refresh using `preventDefault()`
+- Confirming both passwords match before submission
+
+Example:
+
+```tsx
+if (password !== confirmPassword) {
+  alert("Passwords do not match.");
+  return;
+}
+```
+
+---
+
+# Icons
+
+Icons are provided using the **react-icons** package.
+
+Examples include:
+
+- Email icon
+- Lock icon
+- Eye icon
+- Back arrow
+
+Installation:
+
+```bash
+npm install react-icons
+```
+
+---
+
+# Styling
+
+Each component maintains its own CSS file.
+
+Example:
+
+```
+Button
+├── Button.tsx
+├── Button.css
+├── Button.types.ts
+└── index.ts
+```
+
+This structure improves maintainability and minimizes merge conflicts.
+
+---
+
+# Development Workflow
+
+Development follows a component-first approach.
+
+1. Create reusable components.
+2. Build pages using reusable components.
+3. Style according to the Figma design.
+4. Add validation.
+5. Integrate backend APIs.
+6. Test and merge into the main branch.
+
+---
+
+# Current Progress
+
+### Completed
+
+- Project setup
+- Reset Password page
+- PasswordInput component
+- Input component
+- Button component
+- BackLink component
+- SuccessAlert component
+- Password confirmation validation
+- React Icons integration
+
+### In Progress
+
+- Forgot Password page success notification integration
+- UI refinements to match the Figma design exactly
+- Responsive design improvements
+
+### Pending
+
+- React Router integration
+- Backend API integration
+- Email validation
+- Toast notifications
+- Final UI polish
+- Accessibility improvements
+- Unit testing
+
+---
+
+# Testing
+
+During development, individual pages are rendered directly in `App.tsx`.
+
+Example:
+
+```tsx
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
+
+function App() {
+  return <ResetPassword />;
+}
+
+export default App;
+```
+
+After routing is introduced, navigation will be handled using React Router.
+
+---
+
+# Future Improvements
+
+- API integration
+- Authentication context
+- Protected routes
+- Form validation using React Hook Form
+- Schema validation with Zod or Yup
+- Responsive mobile optimization
+- Dark mode support
+- Loading states
+- Error handling
+- Success and error toast notifications
+
+---
+
+# Author
+
+Frontend implementation completed as part of the Scrum Sprint Healthcare Web Application project.
