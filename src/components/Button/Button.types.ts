@@ -1,6 +1,5 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
-import type { IconType } from "react-icons";
 import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+import type { IconType } from "react-icons";
 
 export interface ButtonProps extends DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
