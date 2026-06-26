@@ -1,20 +1,13 @@
-import type { InputHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
 
-export interface PasswordInputProps extends DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> {
-  label?: ReactNode;
+export interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  id?: string;
-  /** Show a toggle button to reveal/hide the password */
-  showToggle?: boolean;
-  /** Show a simple password strength meter */
-  showStrength?: boolean;
-  /** URL for the "Forgot password" link (renders when provided) */
   forgotHref?: string;
-  /** Text for the "Forgot password" link */
   forgotLabel?: string;
-  /** Show a "Remember me" checkbox */
+  icon?: ReactNode;
+  label?: ReactNode;
   showRemember?: boolean;
+  showStrength?: boolean;
+  showToggle?: boolean;
+  toggleIcon?: ReactNode;
 }
