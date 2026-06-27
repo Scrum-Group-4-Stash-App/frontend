@@ -1,13 +1,9 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  (import.meta.env.DEV
-    ? ""
-    : "https://stash-app-e9ambqgxgsffcpf9.canadacentral-01.azurewebsites.net");
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
-const ACCESS_TOKEN_KEY = "stash_access_token";
-const USER_KEY = "stash_user";
+const AUTH_ACCESS_TOKEN_STORAGE_KEY = "stash_access_token";
+const AUTH_USER_STORAGE_KEY = "stash_user";
 
 export interface AuthUser {
   _id: string;
@@ -57,8 +53,8 @@ export function getApiErrorMessage(error: unknown) {
 }
 
 export function saveAuthSession(auth: AuthResponse["data"]) {
-  localStorage.setItem(ACCESS_TOKEN_KEY, auth.accessToken);
-  localStorage.setItem(USER_KEY, JSON.stringify(auth.user));
+  localStorage.setItem(AUTH_ACCESS_TOKEN_STORAGE_KEY, auth.accessToken);
+  localStorage.setItem(AUTH_USER_STORAGE_KEY, JSON.stringify(auth.user));
 }
 
 export async function loginUser(payload: { email: string; password: string }) {
