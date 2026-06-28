@@ -20,7 +20,7 @@
 
 .menu-overlay__body{
     flex:1;
-    overflow-y:auto;
+    overflow-y:hidden;
 }
 
 .menu-overlay__footer {
@@ -29,3 +29,14 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.menu-overlay__body {
+  overflow-y: auto;
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.menu-overlay__body::-webkit-scrollbar {
+  display: none;
+}
