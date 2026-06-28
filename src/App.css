@@ -111,3 +111,12 @@ input {
     gap: 18px;
   }
 }
+
+.sidebar-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px;
+  background: #f5f5f5; /* Temporary */
+  min-height: 100vh;
+}

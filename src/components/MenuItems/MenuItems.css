@@ -1,0 +1,46 @@
+.menu-item{
+    width:100%;
+    height:48px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 16px;
+
+    border:none;
+    border-radius:12px;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.08);
+}
+
+.menu-item.active{
+    background:#6C63FF;
+}
+
+.menu-item__left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.menu-item__right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.menu-item__badge{
+    font-size:14px;
+    opacity:.8;
+}

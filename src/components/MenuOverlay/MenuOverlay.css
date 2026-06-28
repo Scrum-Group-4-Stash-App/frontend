@@ -1,0 +1,31 @@
+.menu-overlay{
+    width:320px;
+    height:100vh;
+
+    background:#15153D;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:32px;
+
+    border-radius:24px;
+
+    color:white;
+}
+
+.menu-overlay__header{
+    margin-bottom:32px;
+}
+
+.menu-overlay__body{
+    flex:1;
+    overflow-y:auto;
+}
+
+.menu-overlay__footer {
+  margin-top: 44px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+

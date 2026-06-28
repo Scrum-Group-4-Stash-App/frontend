@@ -1,21 +1,32 @@
-import "@/App.css";
-import { AppRoutes } from "@/constants/routes";
-import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
-import LoginPage from "@/pages/Login/Login";
-import ResetPassword from "@/pages/ResetPassword/ResetPassword";
-import SignupPage from "@/pages/Signup/Signup";
-import { Navigate, Route, Routes } from "react-router";
+import BrandLogo from "./components/BrandLogo";
+import MenuOverlay from "./components/MenuOverlay";
+import NavigationMenu from "./components/NavMenu";
+import UserCard from "./components/UserCard";
+
+import profileImg from "./assets/Images/profileimg.jpg";
 
 function App() {
   return (
-    <Routes>
-      {/* this wil be updated later on to either redirect to login or dashboard based on the user authentication status */}
-      <Route path="/" element={<Navigate to={AppRoutes.login} replace />} />
-      <Route path={AppRoutes.login} element={<LoginPage />} />
-      <Route path={AppRoutes.signup} element={<SignupPage />} />
-      <Route path={AppRoutes.forgotPassword} element={<ForgotPassword />} />
-      <Route path={AppRoutes.resetPassword} element={<ResetPassword />} />
-    </Routes>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#3A3A3A",
+        padding: "30px",
+      }}
+    >
+              <MenuOverlay
+          logo={<BrandLogo />}
+          footer={
+            <UserCard
+              image={profileImg}
+              name="Emmanuel Ugwoke"
+              status="Active"
+            />
+          }
+        >
+          <NavigationMenu />
+        </MenuOverlay>
+    </div>
   );
 }
 
