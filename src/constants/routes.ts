@@ -6,5 +6,13 @@ export const AppRoutes = {
   resetPassword: "/auth/reset-password",
   dashboard: {
     index: "/dashboard",
+    allResources: "/dashboard/resources",
+    collections: "/dashboard/collections",
+    favorites: "/dashboard/favorites",
+    recents: "/dashboard/recents",
+    shared: "/dashboard/shared",
+    trash: "/dashboard/trash",
+    tags: "/dashboard/tags",
+    profile: "/dashboard/profile",
   },
 } as const;

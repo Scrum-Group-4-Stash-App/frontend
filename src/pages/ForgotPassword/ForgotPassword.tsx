@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./ForgotPassword.css";
 
-import { AppRoutes } from "@/constants/routes";
 import stashLogo from "@/assets/stash-logo.png";
+import { AppRoutes } from "@/constants/routes";
 import { FaLock } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa6";
 import BackLink from "../../components/BackLink";

@@ -22,6 +22,18 @@ interface AuthResponse {
   };
 }
 
+interface LogoutResponse {
+  success: true;
+  message: string;
+}
+
+interface RefreshTokenResponse {
+  success: true;
+  data: {
+    accessToken: string;
+  };
+}
+
 export interface AuthSession {
   user: AuthUser;
   accessToken: string;
@@ -45,6 +57,10 @@ export function saveAuthSession(auth: AuthResponse["data"]) {
 
 export function getStoredAccessToken() {
   return localStorage.getItem(AUTH_ACCESS_TOKEN_STORAGE_KEY);
+}
+
+export function setStoredAccessToken(accessToken: string) {
+  localStorage.setItem(AUTH_ACCESS_TOKEN_STORAGE_KEY, accessToken);
 }
 
 export function getStoredUser(): AuthUser | null {
@@ -88,5 +104,21 @@ export async function registerUser(payload: RegisterRequest) {
   return response.data;
 }
 
+export async function refreshAccessToken() {
+  const response = await api.post<RefreshTokenResponse>("/auth/refresh");
+  setStoredAccessToken(response.data.data.accessToken);
+  return response.data;
+}
+
+export async function logoutUser() {
+  try {
+    const response = await api.post<LogoutResponse>("/auth/logout");
+    return response.data;
+  } finally {
+    clearAuthSession();
+  }
+}
+
 export const login = loginUser;
 export const register = registerUser;
+export const logout = logoutUser;

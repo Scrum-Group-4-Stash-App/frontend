@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import "./BackLink.css";
 import type { BackLinkProps } from "./BackLink.types";
 
@@ -39,14 +40,14 @@ const BackLink = (props: BackLinkProps) => {
 
   if (href) {
     return (
-      <a
+      <Link
         className={`app-back-link ${className}`}
-        href={href}
+        to={href}
         aria-label={ariaLabel}
         {...(rest as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {content}
-      </a>
+      </Link>
     );
   }
 
