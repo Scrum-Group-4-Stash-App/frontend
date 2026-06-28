@@ -22,6 +22,11 @@ interface AuthResponse {
   };
 }
 
+export interface AuthSession {
+  user: AuthUser;
+  accessToken: string;
+}
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -36,6 +41,39 @@ export interface RegisterRequest {
 export function saveAuthSession(auth: AuthResponse["data"]) {
   localStorage.setItem(AUTH_ACCESS_TOKEN_STORAGE_KEY, auth.accessToken);
   localStorage.setItem(AUTH_USER_STORAGE_KEY, JSON.stringify(auth.user));
+}
+
+export function getStoredAccessToken() {
+  return localStorage.getItem(AUTH_ACCESS_TOKEN_STORAGE_KEY);
+}
+
+export function getStoredUser(): AuthUser | null {
+  const rawUser = localStorage.getItem(AUTH_USER_STORAGE_KEY);
+  if (!rawUser) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(rawUser) as AuthUser;
+  } catch {
+    return null;
+  }
+}
+
+export function getStoredSession(): AuthSession | null {
+  const accessToken = getStoredAccessToken();
+  const user = getStoredUser();
+
+  if (!accessToken || !user) {
+    return null;
+  }
+
+  return { user, accessToken };
+}
+
+export function clearAuthSession() {
+  localStorage.removeItem(AUTH_ACCESS_TOKEN_STORAGE_KEY);
+  localStorage.removeItem(AUTH_USER_STORAGE_KEY);
 }
 
 export async function loginUser(payload: LoginRequest) {
