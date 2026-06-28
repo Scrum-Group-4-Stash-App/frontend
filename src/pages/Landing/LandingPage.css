@@ -59,7 +59,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 8px;
+  border: 1.5px solid transparent;
+  border-radius: 6px;
   padding: 0 20px;
   font-size: 12px;
   font-weight: 800;
@@ -67,15 +68,16 @@
   white-space: nowrap;
 }
 
-.landing-button--solid {
+.landing-page .landing-button--solid {
   color: #ffffff;
-  background: #7167ff;
-  box-shadow: 0 10px 24px rgba(113, 103, 255, 0.18);
+  border-color: #655df4;
+  background: #655df4;
+  box-shadow: 0 10px 24px rgba(101, 93, 244, 0.2);
 }
 
-.landing-button--ghost {
-  color: #6258f4;
-  border: 1px solid #b8b3ff;
+.landing-page .landing-button--ghost {
+  color: #655df4;
+  border-color: #827cff;
   background: #ffffff;
 }
 

@@ -122,16 +122,16 @@ input {
 .login-page,
 .signup-page {
   align-items: center;
-  padding: 56px 28px;
+  padding: 56px 42px;
   background: #262626;
 }
 
 .login-shell,
 .signup-shell {
-  width: min(100%, 1280px);
-  min-height: 760px;
+  width: 100%;
+  min-height: calc(100vh - 112px);
   display: grid;
-  grid-template-columns: minmax(420px, 0.95fr) minmax(520px, 1.05fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   background: #ffffff;
   box-shadow: 0 32px 90px rgba(0, 0, 0, 0.22);
   overflow: hidden;
@@ -140,7 +140,7 @@ input {
 .login-visual,
 .signup-visual {
   position: relative;
-  min-height: 760px;
+  min-height: calc(100vh - 112px);
   background: #101820;
   overflow: hidden;
 }
@@ -246,8 +246,8 @@ input {
 @media (max-width: 560px) {
   .login-page,
   .signup-page {
-    padding: 0;
-    background: #ffffff;
+    padding: 18px;
+    background: #262626;
   }
 
   .login-shell,
