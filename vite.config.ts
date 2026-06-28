@@ -16,18 +16,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    proxy: {
-      "/api": {
-        target:
-          "https://stash-app-e9ambqgxgsffcpf9.canadacentral-01.azurewebsites.net",
-        changeOrigin: true,
-        headers: {
-          Origin:
-            "https://stash-app-e9ambqgxgsffcpf9.canadacentral-01.azurewebsites.net",
-        },
-        secure: true,
-      },
-    },
-  },
 });

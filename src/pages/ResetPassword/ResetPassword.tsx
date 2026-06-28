@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ResetPassword.css";
 
+import stashLogo from "@/assets/stash-logo.png";
 import BackLink from "../../components/BackLink";
 import PasswordInput from "../../components/PasswordInput";
 import Button from "../../components/Button";
@@ -56,6 +57,8 @@ const ResetPassword = () => {
             Reset Password
           </Button>
         </form>
+
+        <img className="reset-password-logo" src={stashLogo} alt="STASH" />
       </div>
     </div>
   );
