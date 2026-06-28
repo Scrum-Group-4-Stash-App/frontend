@@ -1,0 +1,123 @@
+.collection-card {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #e5e7eb;
+  /* height: 267px; */
+  width: 370px;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.collection-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #d1d5db;
+}
+
+/* .collection-card__folder{
+  
+} */
+
+.collection-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* margin-bottom: 1rem; */
+}
+
+.collection-card__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #1f2937;
+  flex: 1;
+}
+
+.collection-card__menu {
+  position: relative;
+}
+
+.collection-card__menu-btn {
+  background: none;
+  border: none;
+  top: 100px;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.collection-card__menu-btn:hover {
+  color: #1f2937;
+}
+
+.collection-card__dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.collection-card__action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.collection-card__action:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.collection-card__action--delete {
+  color: #dc2626;
+}
+
+.collection-card__action--delete:hover {
+  background-color: #fee2e2;
+}
+
+.collection-card__description {
+  color: rgba(0, 0, 0, 1);
+  font-size: 16px;
+  font-style: regular;
+  font-weight: 400;
+  margin: 25px 0 1rem 0;
+  line-height: 1.5;
+}
+
+.collection-card__timestamp {
+  font-size: 13px;
+  font-style: inter;
+  color: rgba(96, 96, 96, 1);
+  font-weight: 500;
+}
+
+.collection-card__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid #f3f4f6;
+  padding-top: 0.5rem;
+}
+
+.collection-card__count {
+  font-size: 0.85rem;
+  color: rgba(96, 96, 96, 1);
+  font-weight: 500;
+}

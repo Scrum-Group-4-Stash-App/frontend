@@ -4,6 +4,7 @@ import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
 import LoginPage from "@/pages/Login/Login";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import SignupPage from "@/pages/Signup/Signup";
+import CollectionsPage from "@/pages/Collections";
 import { Navigate, Route, Routes } from "react-router";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path={AppRoutes.signup} element={<SignupPage />} />
       <Route path={AppRoutes.forgotPassword} element={<ForgotPassword />} />
       <Route path={AppRoutes.resetPassword} element={<ResetPassword />} />
+      <Route path={AppRoutes.collections} element={<CollectionsPage />} />
     </Routes>
   );
 }

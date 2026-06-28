@@ -1,0 +1,9 @@
+.collections-page {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f9fafb;
+}
+
+.collections-page > * + * {
+  margin-top: 2rem;
+}

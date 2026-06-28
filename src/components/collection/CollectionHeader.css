@@ -1,0 +1,43 @@
+.collection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.collection-header__content {
+  flex: 1;
+}
+
+.collection-header__title {
+  font-size: 2.5rem;
+  font: Inter;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  color: #1f2937;
+}
+
+.collection-header__description {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 1);
+  margin: 0;
+}
+
+.collection-header__button {
+  flex-shrink: 0;
+  background-color: transparent;
+  border: 1px solid rgba(103, 104, 255, 1);
+  border-radius: 0.2rem;
+  color: rgba(57, 57, 57, 1);
+}
+
+@media (max-width: 768px) {
+  .collection-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .collection-header__title {
+    font-size: 2rem;
+  }
+}

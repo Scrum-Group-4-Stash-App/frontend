@@ -1,0 +1,32 @@
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.collection-grid-empty {
+  text-align: center;
+  padding: 3rem 3rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px dashed #e5e7eb;
+}
+
+.collection-grid-empty p {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .collection-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
