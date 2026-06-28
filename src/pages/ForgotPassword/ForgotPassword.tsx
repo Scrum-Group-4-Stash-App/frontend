@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ForgotPassword.css";
 
 import { AppRoutes } from "@/constants/routes";
+import stashLogo from "@/assets/stash-logo.png";
 import { FaLock } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa6";
 import BackLink from "../../components/BackLink";
@@ -54,6 +55,8 @@ const ForgotPassword = () => {
             Reset Password
           </Button>
         </form>
+
+        <img className="forgot-password-logo" src={stashLogo} alt="STASH" />
       </div>
     </div>
   );
