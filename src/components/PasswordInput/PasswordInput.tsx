@@ -60,6 +60,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
             className="app-password-input__toggle"
             aria-label={visible ? "Hide password" : "Show password"}
             onClick={() => setVisible((current) => !current)}
+            tabIndex={-1}
           >
             {toggleIcon || (visible ? "Hide" : "Show")}
           </button>
