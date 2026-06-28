@@ -19,19 +19,6 @@ jobs:
         with:
           submodules: true
           lfs: false
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "24"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-        run: npm run build
-
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -45,7 +32,6 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
-          skip_app_build: true # Set this to true to skip building the app artifact
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
