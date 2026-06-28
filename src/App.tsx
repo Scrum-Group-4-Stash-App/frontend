@@ -5,10 +5,11 @@ import PublicRoute from "@/features/auth/guards/PublicRoute";
 import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
 import LandingPage from "@/pages/Landing/LandingPage";
 import LoginPage from "@/pages/Login/Login";
+import NotFound from "@/pages/NotFound";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import SignupPage from "@/pages/Signup/Signup";
 import Dashboard from "@/pages/dashboard";
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 
 function App() {
   return (
@@ -25,9 +26,20 @@ function App() {
 
       <Route element={<ProtectedRoute />}>
         <Route path={AppRoutes.dashboard.index} element={<Dashboard />} />
+        <Route
+          path={AppRoutes.dashboard.allResources}
+          element={<Dashboard />}
+        />
+        <Route path={AppRoutes.dashboard.collections} element={<Dashboard />} />
+        <Route path={AppRoutes.dashboard.favorites} element={<Dashboard />} />
+        <Route path={AppRoutes.dashboard.recents} element={<Dashboard />} />
+        <Route path={AppRoutes.dashboard.shared} element={<Dashboard />} />
+        <Route path={AppRoutes.dashboard.trash} element={<Dashboard />} />
+        <Route path={AppRoutes.dashboard.tags} element={<Dashboard />} />
+        <Route path={AppRoutes.dashboard.profile} element={<Dashboard />} />
       </Route>
 
-      <Route path="*" element={<Navigate to={AppRoutes.home} replace />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

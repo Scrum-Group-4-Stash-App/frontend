@@ -1,17 +1,3 @@
-import {
-  Archive,
-  Folder,
-  Menu,
-  PenLine,
-  Play,
-  Search,
-  Share2,
-  X,
-  Zap,
-} from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router";
-import { AppRoutes } from "@/constants/routes";
 import adobeLogo from "@/assets/adobe-logo.png";
 import gitbookLogo from "@/assets/gitbook-logo.png";
 import githubLogo from "@/assets/github-logo.png";
@@ -25,6 +11,20 @@ import stashLogo from "@/assets/stash-logo.png";
 import trustBadge from "@/assets/trust-badge.png";
 import xLogo from "@/assets/x-logo.png";
 import youtubeLogo from "@/assets/youtube-logo.png";
+import { AppRoutes } from "@/constants/routes";
+import {
+  Archive,
+  Folder,
+  Menu,
+  PenLine,
+  Play,
+  Search,
+  Share2,
+  X,
+  Zap,
+} from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router";
 import "./LandingPage.css";
 
 const partners = [

@@ -3,8 +3,8 @@ import "./ResetPassword.css";
 
 import stashLogo from "@/assets/stash-logo.png";
 import BackLink from "../../components/BackLink";
-import PasswordInput from "../../components/PasswordInput";
 import Button from "../../components/Button";
+import PasswordInput from "../../components/PasswordInput";
 
 import { FaLock } from "react-icons/fa";
 
