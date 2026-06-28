@@ -31,10 +31,10 @@ function LoginPage() {
   return (
     <main className="h-screen w-full bg-white md:bg-[#262626]">
       <section
-        className="grid h-full w-full md:grid-cols-2 md:bg-white"
+        className="grid h-full w-full lg:grid-cols-2 md:bg-white"
         aria-label="Login"
       >
-        <div className="relative hidden h-screen md:block" aria-hidden="true">
+        <div className="relative hidden h-screen lg:block" aria-hidden="true">
           <img
             className="h-full w-full object-cover object-center"
             src={loginVisual}
@@ -48,7 +48,7 @@ function LoginPage() {
         </div>
 
         <div className="flex h-screen justify-center overflow-y-auto">
-          <div className="flex min-h-full w-full max-w-130 items-center px-6 py-8 md:px-10 md:py-12">
+          <div className="flex min-h-full w-[85%] xl:max-w-130 lg:max-w-115 items-center px-6 py-8 md:px-10 md:py-12">
             <form
               className="auth-form w-full! max-w-none! gap-5"
               onSubmit={handleSubmit}
