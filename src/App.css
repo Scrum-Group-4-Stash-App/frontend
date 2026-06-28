@@ -65,6 +65,25 @@ input {
   margin-top: 12px;
 }
 
+.auth-message {
+  margin: 0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.auth-message--error {
+  color: #9f1d1d;
+  background: #fde8e8;
+}
+
+.auth-message--success {
+  color: #126239;
+  background: #dff8e8;
+}
+
 .auth-divider {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
