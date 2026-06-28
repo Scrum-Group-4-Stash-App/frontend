@@ -4,4 +4,7 @@ export const AppRoutes = {
   signup: "/auth/signup",
   forgotPassword: "/auth/forgot-password",
   resetPassword: "/auth/reset-password",
+  dashboard: {
+    index: "/dashboard",
+  },
 } as const;
