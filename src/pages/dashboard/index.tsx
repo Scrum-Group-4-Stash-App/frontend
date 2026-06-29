@@ -2,7 +2,6 @@ import api, { getApiErrorMessage } from "@/services/api";
 import {
   BarChart3,
   Bookmark,
-  ChevronRight,
   Folder,
   Folders,
   Layers3,
@@ -256,7 +255,6 @@ const Dashboard = () => {
       normalizeTag(tag).toLowerCase().includes("fav"),
     ),
   ).length;
-  const latestResource = sortedResources[0];
   const breakdown = topTags.slice(0, 5).map((item, index) => {
     const topCount = topTags[0]?.value ?? 1;
     const width = Math.max(8, Math.round((item.value / topCount) * 100));
@@ -674,57 +672,6 @@ function SaveBoardField({
         onChange={(e) => onChange(e.target.value)}
       />
     </label>
-  );
-}
-
-interface SaveBoardSelectProps {
-  label: string;
-  value: string;
-  options: string[];
-  open: boolean;
-  onToggle: () => void;
-  onSelect: (value: string) => void;
-}
-
-function SaveBoardSelect({
-  label,
-  value,
-  options,
-  open,
-  onToggle,
-  onSelect,
-}: SaveBoardSelectProps) {
-  return (
-    <div className="relative grid gap-2">
-      <span className="text-xs font-semibold text-[#33333d]">{label}</span>
-      <button
-        type="button"
-        aria-expanded={open}
-        onClick={onToggle}
-        className="flex h-11 items-center justify-between rounded-md border border-[#aaaabb] bg-transparent px-3! text-left text-base font-medium text-[#55555f] hover:bg-white/50"
-      >
-        <span>{value}</span>
-        <ChevronRight size={18} className={open ? "rotate-90" : ""} />
-      </button>
-
-      {open && (
-        <div className="absolute left-0 top-full z-10 mt-2 w-full border border-[#d7d7df] bg-white px-8! py-3! shadow-lg">
-          <ul className="space-y-1!">
-            {options.map((option) => (
-              <li key={option}>
-                <button
-                  type="button"
-                  onClick={() => onSelect(option)}
-                  className="w-full text-left text-xl leading-7 text-[#555] hover:text-[#111]"
-                >
-                  {option}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
   );
 }
 
