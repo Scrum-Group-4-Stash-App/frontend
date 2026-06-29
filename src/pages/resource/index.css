@@ -168,41 +168,113 @@
 
 .linkSection {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 12px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 
 .linkColumn {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(103, 104, 255, 0.16);
+  background: #ffffff;
+  box-shadow: 0 4px 5px rgba(17, 24, 39, 0.05);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.linkColumn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(103, 104, 255, 0.24);
+  box-shadow: 0 6px 16px rgba(17, 24, 39, 0.06);
 }
 
 .linkSection h4 {
   color: #000000;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 17px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
 .linkSection p {
-  color: #000000;
-  font-weight: 400;
+  color: #667085;
+  font-weight: 500;
   font-size: 12px;
+  margin: 0;
+}
+
+.resourceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.resourceTag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #4f46e5;
+  background: linear-gradient(
+    135deg,
+    rgba(103, 104, 255, 0.16),
+    rgba(99, 102, 241, 0.08)
+  );
+  border: 1px solid rgba(103, 104, 255, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .linkDate {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding-top: 2px;
 }
 
 .linkDate p {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 12px;
+  color: #6b7280;
 }
 
 .linkDate img {
   width: 16px;
+}
+
+@media (max-width: 768px) {
+  .linkColumn {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .linkDate {
+    align-self: flex-end;
+    padding-top: 0;
+  }
 }
