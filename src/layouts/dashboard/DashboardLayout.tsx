@@ -8,7 +8,7 @@ interface DashboardLayoutProps {
 }
 
 function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const handleToggleSidebar = () => {

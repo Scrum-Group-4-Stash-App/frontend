@@ -443,4 +443,31 @@
   .landing-footer__links {
     grid-template-columns: 1fr;
   }
+
+  .landing-footer {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .landing-footer__brand {
+    display: grid;
+    justify-items: center;
+  }
+
+  .landing-footer__brand p {
+    margin-inline: auto;
+  }
+
+  .landing-footer__socials {
+    justify-content: center;
+  }
+
+  .landing-footer__links {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .landing-footer__links div {
+    justify-items: center;
+  }
 }

@@ -1,12 +1,13 @@
 import "@/App.css";
 import signupVisual from "@/assets/signup-visual.jpg";
-import stashLogo from "@/assets/stash-logo.png";
+import logoIcon from "@/assets/logo-icon.png";
 import AuthSocial from "@/components/AuthSocial";
 import Button from "@/components/Button";
 import PasswordInput from "@/components/PasswordInput";
 import TextInput from "@/components/TextInput";
 import { AppRoutes } from "@/constants/routes";
 import { useRegister } from "@/features/auth/hooks/useRegister";
+import { getPasswordLengthError } from "@/features/auth/password-validation";
 import { EyeOff, Lock, Mail, User } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
@@ -29,6 +30,12 @@ function SignupPage() {
       return;
     }
 
+    const passwordLengthError = getPasswordLengthError(password);
+    if (passwordLengthError) {
+      toast.error(passwordLengthError);
+      return;
+    }
+
     try {
       await register({ name, email, password });
       navigate(AppRoutes.dashboard.index, { replace: true });
@@ -38,28 +45,20 @@ function SignupPage() {
   }
 
   return (
-    <main className="h-screen w-full bg-white md:bg-[#262626]">
-      <section
-        className="grid h-full w-full lg:grid-cols-2 md:bg-white"
-        aria-label="Create account"
-      >
-        <div className="relative hidden h-screen lg:block" aria-hidden="true">
-          <img
-            className="h-full w-full object-cover object-center"
-            src={signupVisual}
-            alt=""
-          />
-          <img
-            className="absolute left-1/2 top-16 w-[min(52%,290px)] -translate-x-1/2 rounded-xl bg-white/70 px-4 py-2 shadow-lg backdrop-blur-sm"
-            src={stashLogo}
-            alt=""
-          />
+    <main className="auth-split-page">
+      <section className="auth-split" aria-label="Create account">
+        <div className="auth-visual" aria-hidden="true">
+          <img className="auth-visual__image" src={signupVisual} alt="" />
+          <div className="auth-visual__brand">
+            <img src={logoIcon} alt="" />
+            <span>STASH</span>
+          </div>
         </div>
 
-        <div className="flex h-screen justify-center overflow-y-auto">
-          <div className="flex min-h-full w-[85%] xl:max-w-130 lg:max-w-115 items-center px-6 py-8 md:px-10 md:py-12">
+        <div className="auth-panel">
+          <div className="auth-panel__inner">
             <form
-              className="auth-form w-full! max-w-none! gap-5"
+              className="auth-form auth-form--figma"
               onSubmit={handleSubmit}
             >
               <header className="auth-header">
@@ -69,7 +68,7 @@ function SignupPage() {
 
               <TextInput
                 label="Name"
-                placeholder="Enter your full name"
+                placeholder="This is a placeholder"
                 icon={<User size={16} />}
                 value={name}
                 onChange={(event) => setName(event.target.value)}
@@ -79,7 +78,7 @@ function SignupPage() {
               <TextInput
                 label="Email"
                 type="email"
-                placeholder="Enter your email address"
+                placeholder="This is a placeholder"
                 icon={<Mail size={16} />}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}

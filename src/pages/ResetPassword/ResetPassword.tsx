@@ -2,30 +2,54 @@ import React, { useState } from "react";
 import "./ResetPassword.css";
 
 import stashLogo from "@/assets/stash-logo.png";
+import { AppRoutes } from "@/constants/routes";
+import { useResetPassword } from "@/features/auth/hooks/useResetPassword";
+import { getPasswordLengthError } from "@/features/auth/password-validation";
 import BackLink from "../../components/BackLink";
 import Button from "../../components/Button";
 import PasswordInput from "../../components/PasswordInput";
 
 import { FaLock } from "react-icons/fa";
+import { useNavigate, useSearchParams } from "react-router";
+import { toast } from "sonner";
 
 const ResetPassword = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { resetPassword, isSubmitting } = useResetPassword();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const token =
+    searchParams.get("token") ||
+    searchParams.get("resetToken") ||
+    searchParams.get("code") ||
+    "";
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+    if (!token) {
+      toast.error("Reset token is missing. Please use the link in your email.");
       return;
     }
 
-    console.log({
-      password,
-      confirmPassword,
-    });
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
 
-    // Backend API call will go here later
+    const passwordLengthError = getPasswordLengthError(password);
+    if (passwordLengthError) {
+      toast.error(passwordLengthError);
+      return;
+    }
+
+    try {
+      await resetPassword({ token, password });
+      navigate(AppRoutes.login, { replace: true });
+    } catch {
+      // Notification handled in useResetPassword.
+    }
   };
 
   return (
@@ -44,6 +68,7 @@ const ResetPassword = () => {
             placeholder="Enter your new password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           <PasswordInput
@@ -51,10 +76,11 @@ const ResetPassword = () => {
             placeholder="Confirm your password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           />
 
-          <Button type="submit" icon={FaLock}>
-            Reset Password
+          <Button type="submit" icon={FaLock} disabled={isSubmitting}>
+            {isSubmitting ? "Resetting password..." : "Reset Password"}
           </Button>
         </form>
 
