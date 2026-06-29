@@ -100,11 +100,37 @@ export function getApiErrorMessage(error: unknown) {
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
     const responseMessage =
       error.response?.data?.message || error.response?.data?.error?.message;
+    const validationMessage = getValidationErrorMessage(
+      error.response?.data?.errors,
+    );
 
-    return responseMessage || error.message || "Something went wrong.";
+    return (
+      responseMessage ||
+      validationMessage ||
+      error.message ||
+      "Something went wrong."
+    );
   }
 
   return "Something went wrong.";
+}
+
+function getValidationErrorMessage(errors: unknown) {
+  if (!errors || typeof errors !== "object") {
+    return null;
+  }
+
+  const [firstError] = Object.values(errors as Record<string, unknown>);
+
+  if (typeof firstError === "string") {
+    return firstError;
+  }
+
+  if (Array.isArray(firstError)) {
+    return firstError.find((message) => typeof message === "string") ?? null;
+  }
+
+  return null;
 }
 
 export default api;

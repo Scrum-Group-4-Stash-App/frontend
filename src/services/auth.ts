@@ -34,6 +34,11 @@ interface RefreshTokenResponse {
   };
 }
 
+interface MessageResponse {
+  success: true;
+  message: string;
+}
+
 export interface AuthSession {
   user: AuthUser;
   accessToken: string;
@@ -47,6 +52,15 @@ export interface LoginRequest {
 export interface RegisterRequest {
   name: string;
   email: string;
+  password: string;
+}
+
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+export interface ResetPasswordRequest {
+  token: string;
   password: string;
 }
 
@@ -101,6 +115,22 @@ export async function loginUser(payload: LoginRequest) {
 export async function registerUser(payload: RegisterRequest) {
   const response = await api.post<AuthResponse>("/auth/register", payload);
   saveAuthSession(response.data.data);
+  return response.data;
+}
+
+export async function requestPasswordReset(payload: ForgotPasswordRequest) {
+  const response = await api.post<MessageResponse>(
+    "/auth/forgot-password",
+    payload,
+  );
+  return response.data;
+}
+
+export async function resetPassword(payload: ResetPasswordRequest) {
+  const response = await api.post<MessageResponse>(
+    "/auth/reset-password",
+    payload,
+  );
   return response.data;
 }
 
