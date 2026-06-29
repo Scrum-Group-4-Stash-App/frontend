@@ -1,14 +1,12 @@
-import "./index.css";
-import notificationProfile from "@/assets/notificationProfile.svg";
-import searchIcon from "@/assets/search-normal.png";
-import closeIcon from "@/assets/close-circle.svg";
-import filterIcon from "@/assets/filterIcon.svg";
 import closeBlueIcon from "@/assets/blue-close-circle.svg";
-import tagExtension from "@/assets/tagExtension.png";
+import filterIcon from "@/assets/filterIcon.svg";
 import linkIcon from "@/assets/linkIcon.svg";
 import saveIcon from "@/assets/saveIcon.svg";
-import { useEffect, useState } from "react";
+import searchIcon from "@/assets/search-normal.png";
+import tagExtension from "@/assets/tagExtension.png";
 import api, { getApiErrorMessage } from "@/services/api";
+import { useEffect, useState } from "react";
+import "./index.css";
 
 interface Resource {
   _id: string;
@@ -118,14 +116,16 @@ const ResourcesPage = () => {
     <div className="page">
       <div className="searchBar">
         <div className="inputWrapper">
-          <div className="searchIcons">
+          <div className="absolute left-3 top-2">
             <img src={searchIcon} alt="searchIcon" />
-            <img src={closeIcon} alt="closeIcon" />
           </div>
 
-          <input className="resourceInput" type="text" />
+          <input
+            className="resourceInput pl-12!"
+            type="text"
+            placeholder="Search resources..."
+          />
         </div>
-        <img src={notificationProfile} alt="notificationProfile" />
       </div>
       <h3 className="searchResultheading">Search Results</h3>
       <div className="searchResultSection">
