@@ -2,28 +2,31 @@ import "@/App.css";
 import { AppRoutes } from "@/constants/routes";
 import ProtectedRoute from "@/features/auth/guards/ProtectedRoute";
 import PublicRoute from "@/features/auth/guards/PublicRoute";
+import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
 import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
 import LandingPage from "@/pages/Landing/LandingPage";
 import LoginPage from "@/pages/Login/Login";
 import NotFound from "@/pages/NotFound";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import SignupPage from "@/pages/Signup/Signup";
+import Dashboard from "@/pages/dashboard";
+import DashboardPlaceholder from "@/pages/dashboard/DashboardPlaceholder";
+import ResourcesPage from "@/pages/resource";
 import { Route, Routes } from "react-router";
-import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
-
-import ResourcesPage from "./pages/resource";
-import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
     <Routes>
       <Route path={AppRoutes.home} element={<LandingPage />} />
+
       <Route element={<PublicRoute />}>
         <Route path={AppRoutes.login} element={<LoginPage />} />
         <Route path={AppRoutes.signup} element={<SignupPage />} />
       </Route>
+
       <Route path={AppRoutes.forgotPassword} element={<ForgotPassword />} />
       <Route path={AppRoutes.resetPassword} element={<ResetPassword />} />
+
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
           <Route path={AppRoutes.dashboard.index} element={<Dashboard />} />
@@ -33,28 +36,35 @@ function App() {
           />
           <Route
             path={AppRoutes.dashboard.collections}
-            element={<div>Collections</div>}
+            element={<DashboardPlaceholder title="Collections" />}
           />
           <Route
             path={AppRoutes.dashboard.favorites}
-            element={<div>Favorites</div>}
+            element={<DashboardPlaceholder title="Favorites" />}
           />
           <Route
             path={AppRoutes.dashboard.recents}
-            element={<div>Recents</div>}
+            element={<DashboardPlaceholder title="Recents" />}
           />
           <Route
             path={AppRoutes.dashboard.shared}
-            element={<div>Shared</div>}
+            element={<DashboardPlaceholder title="Shared with me" />}
           />
-          <Route path={AppRoutes.dashboard.trash} element={<div>Trash</div>} />
-          <Route path={AppRoutes.dashboard.tags} element={<div>Tags</div>} />
+          <Route
+            path={AppRoutes.dashboard.trash}
+            element={<DashboardPlaceholder title="Trash" />}
+          />
+          <Route
+            path={AppRoutes.dashboard.tags}
+            element={<DashboardPlaceholder title="Tags" />}
+          />
           <Route
             path={AppRoutes.dashboard.profile}
-            element={<div>Profile</div>}
+            element={<DashboardPlaceholder title="Profile" />}
           />
         </Route>
       </Route>
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -1,10 +1,10 @@
-import { useState } from "react";
 import DashboardNavbar from "@/layouts/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/layouts/dashboard/DashboardSidebar";
+import { useState } from "react";
 import { Outlet } from "react-router";
 
 function DashboardLayout() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const handleToggleSidebar = () => {

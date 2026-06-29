@@ -1,12 +1,12 @@
 import loginVisual from "@/assets/login-visual.jpg";
-import stashLogo from "@/assets/stash-logo.png";
+import logoIcon from "@/assets/logo-icon.png";
 import AuthSocial from "@/components/AuthSocial";
 import Button from "@/components/Button";
 import PasswordInput from "@/components/PasswordInput";
 import TextInput from "@/components/TextInput";
 import { AppRoutes } from "@/constants/routes";
 import { useLogin } from "@/features/auth/hooks/useLogin";
-import { ChevronRight, EyeOff, Lock, Mail } from "lucide-react";
+import { EyeOff, Lock, Mail } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
@@ -29,28 +29,20 @@ function LoginPage() {
   }
 
   return (
-    <main className="h-screen w-full bg-white md:bg-[#262626]">
-      <section
-        className="grid h-full w-full lg:grid-cols-2 md:bg-white"
-        aria-label="Login"
-      >
-        <div className="relative hidden h-screen lg:block" aria-hidden="true">
-          <img
-            className="h-full w-full object-cover object-center"
-            src={loginVisual}
-            alt=""
-          />
-          <img
-            className="absolute left-1/2 top-16 w-[min(52%,290px)] -translate-x-1/2 rounded-xl bg-white/70 px-4 py-2 shadow-lg backdrop-blur-sm"
-            src={stashLogo}
-            alt=""
-          />
+    <main className="auth-split-page">
+      <section className="auth-split" aria-label="Login">
+        <div className="auth-visual" aria-hidden="true">
+          <img className="auth-visual__image" src={loginVisual} alt="" />
+          <div className="auth-visual__brand">
+            <img src={logoIcon} alt="" />
+            <span>STASH</span>
+          </div>
         </div>
 
-        <div className="flex h-screen justify-center overflow-y-auto">
-          <div className="flex min-h-full w-[85%] xl:max-w-130 lg:max-w-115 items-center px-6 py-8 md:px-10 md:py-12">
+        <div className="auth-panel">
+          <div className="auth-panel__inner auth-panel__inner--login">
             <form
-              className="auth-form w-full! max-w-none! gap-5"
+              className="auth-form auth-form--figma"
               onSubmit={handleSubmit}
             >
               <header className="auth-header">
@@ -61,9 +53,8 @@ function LoginPage() {
               <TextInput
                 label="Email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="example@gmail.com"
                 icon={<Mail size={16} />}
-                rightIcon={<ChevronRight size={16} />}
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
@@ -75,7 +66,7 @@ function LoginPage() {
                 showToggle
                 showRemember
                 forgotHref={AppRoutes.forgotPassword}
-                forgotLabel="Forget Password?"
+                forgotLabel="Forgot Password?"
                 icon={<Lock size={16} />}
                 toggleIcon={<EyeOff size={16} />}
                 value={password}
