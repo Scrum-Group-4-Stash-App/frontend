@@ -126,7 +126,9 @@ function LandingPage() {
 
       <section className="landing-hero" id="product">
         <div className="landing-hero__copy">
-          <h1>Your personal resources library</h1>
+          <h1 className="text-4xl md:text-6xl!">
+            Your Ideas Deserve a Better Home
+          </h1>
           <p>
             Save articles, videos, tools, and links from anywhere. Organise,
             annotate, and actually find them again. Stop losing the things you

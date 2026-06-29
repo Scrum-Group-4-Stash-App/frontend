@@ -17,6 +17,18 @@ interface Resource {
   description: string;
   tags: string[];
   createdAt: string;
+  updatedAt: string;
+}
+
+interface ResourcesResponse {
+  success: boolean;
+  meta: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+  data: Resource[];
 }
 
 const ResourcesPage = () => {
@@ -46,7 +58,7 @@ const ResourcesPage = () => {
     const fetchResources = async () => {
       setLoadingResources(true);
       try {
-        const res = await api.get("/resources", {
+        const res = await api.get<ResourcesResponse>("/resources", {
           params: {
             ...(selectedTags.length > 0 && {
               tags: selectedTags
