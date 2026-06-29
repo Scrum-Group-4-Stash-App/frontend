@@ -1,4 +1,3 @@
-import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
 import readingListNotionLogo from "@/assets/reading-list-notion.png";
 import {
   BarChart3,
@@ -141,7 +140,7 @@ const Dashboard = () => {
   const [saveBoardOpen, setSaveBoardOpen] = useState(false);
 
   return (
-    <DashboardLayout>
+    <>
       <div className="mx-auto w-full max-w-[1240px] px-5! pb-20! md:px-8! lg:px-10!">
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {stats.map((item) => {
@@ -314,7 +313,7 @@ const Dashboard = () => {
       {saveBoardOpen && (
         <SaveBoardModal onClose={() => setSaveBoardOpen(false)} />
       )}
-    </DashboardLayout>
+    </>
   );
 };
 

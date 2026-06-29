@@ -1,13 +1,9 @@
-import type { ReactNode } from "react";
-import { useState } from "react";
 import DashboardNavbar from "@/layouts/dashboard/DashboardNavbar";
 import DashboardSidebar from "@/layouts/dashboard/DashboardSidebar";
+import { useState } from "react";
+import { Outlet } from "react-router";
 
-interface DashboardLayoutProps {
-  children?: ReactNode;
-}
-
-function DashboardLayout({ children }: DashboardLayoutProps) {
+function DashboardLayout() {
   const [collapsed, setCollapsed] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
@@ -59,7 +55,7 @@ function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="min-w-0 flex-1">
         <DashboardNavbar onToggleSidebar={handleToggleSidebar} />
         <main className="h-[calc(100vh-73px)] overflow-y-auto bg-(--dash-surface)">
-          {children}
+          <Outlet />
         </main>
       </div>
     </div>
