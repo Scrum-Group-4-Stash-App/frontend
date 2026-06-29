@@ -1,4 +1,8 @@
 {
+  "mimeTypes": {
+    ".tsx": "text/javascript",
+    ".ts": "text/javascript"
+  },
   "routes": [
     {
       "route": "/*",
