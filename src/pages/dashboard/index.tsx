@@ -1,9 +1,9 @@
 import readingListNotionLogo from "@/assets/reading-list-notion.png";
+import api, { getApiErrorMessage } from "@/services/api";
 import {
   BarChart3,
   Bookmark,
   ChevronRight,
-  X,
   Folder,
   Folders,
   Layers3,
@@ -11,9 +11,9 @@ import {
   MoreHorizontal,
   Plane,
   Tags,
+  X,
 } from "lucide-react";
 import { useState } from "react";
-import api, { getApiErrorMessage } from "@/services/api";
 
 const stats = [
   {
@@ -387,9 +387,9 @@ function SaveBoardModal({ onClose, onSuccess }: SaveBoardModalProps) {
     >
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-[570px] rounded-2xl bg-[#f0f0ff] px-9! py-7! text-[#151515] shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
+        className="w-full max-w-[570px] rounded-2xl bg-[#f0f0ff] px-9! py-7! text-[#151515] shadow-[0_24px_70px_rgba(0,0,0,0.28)] max-h-[95dvh] overflow-y-auto"
       >
-        <div className="mb-7 flex items-start justify-between gap-5">
+        <div className="mb-4 flex items-start justify-between gap-5">
           <div>
             <h2 id="save-board-title" className="text-2xl font-semibold">
               Save on Stash
@@ -431,38 +431,6 @@ function SaveBoardModal({ onClose, onSuccess }: SaveBoardModalProps) {
             onChange={setDescription}
           />
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <SaveBoardSelect
-              label="Type"
-              value={type}
-              options={resourceTypes}
-              open={typeOpen}
-              onToggle={() => {
-                setTypeOpen((o) => !o);
-                setCollectionOpen(false);
-              }}
-              onSelect={(v) => {
-                setType(v);
-                setTypeOpen(false);
-              }}
-            />
-
-            <SaveBoardSelect
-              label="Collection"
-              value={collection}
-              options={collections}
-              open={collectionOpen}
-              onToggle={() => {
-                setCollectionOpen((o) => !o);
-                setTypeOpen(false);
-              }}
-              onSelect={(v) => {
-                setCollection(v);
-                setCollectionOpen(false);
-              }}
-            />
-          </div>
-
           <SaveBoardField
             label="Tags"
             labelSuffix="(only spacing)"
@@ -474,7 +442,7 @@ function SaveBoardModal({ onClose, onSuccess }: SaveBoardModalProps) {
 
         {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2">
           <button
             type="button"
             onClick={onClose}
