@@ -8,37 +8,53 @@ import LoginPage from "@/pages/Login/Login";
 import NotFound from "@/pages/NotFound";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import SignupPage from "@/pages/Signup/Signup";
-import Dashboard from "@/pages/dashboard";
 import { Route, Routes } from "react-router";
+import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
+
+import ResourcesPage from "./pages/resource";
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
     <Routes>
       <Route path={AppRoutes.home} element={<LandingPage />} />
-
       <Route element={<PublicRoute />}>
         <Route path={AppRoutes.login} element={<LoginPage />} />
         <Route path={AppRoutes.signup} element={<SignupPage />} />
       </Route>
-
       <Route path={AppRoutes.forgotPassword} element={<ForgotPassword />} />
       <Route path={AppRoutes.resetPassword} element={<ResetPassword />} />
-
       <Route element={<ProtectedRoute />}>
-        <Route path={AppRoutes.dashboard.index} element={<Dashboard />} />
-        <Route
-          path={AppRoutes.dashboard.allResources}
-          element={<Dashboard />}
-        />
-        <Route path={AppRoutes.dashboard.collections} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.favorites} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.recents} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.shared} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.trash} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.tags} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.profile} element={<Dashboard />} />
+        <Route element={<DashboardLayout />}>
+          <Route path={AppRoutes.dashboard.index} element={<Dashboard />} />
+          <Route
+            path={AppRoutes.dashboard.allResources}
+            element={<ResourcesPage />}
+          />
+          <Route
+            path={AppRoutes.dashboard.collections}
+            element={<div>Collections</div>}
+          />
+          <Route
+            path={AppRoutes.dashboard.favorites}
+            element={<div>Favorites</div>}
+          />
+          <Route
+            path={AppRoutes.dashboard.recents}
+            element={<div>Recents</div>}
+          />
+          <Route
+            path={AppRoutes.dashboard.shared}
+            element={<div>Shared</div>}
+          />
+          <Route path={AppRoutes.dashboard.trash} element={<div>Trash</div>} />
+          <Route path={AppRoutes.dashboard.tags} element={<div>Tags</div>} />
+          <Route
+            path={AppRoutes.dashboard.profile}
+            element={<div>Profile</div>}
+          />
+        </Route>
       </Route>
-
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

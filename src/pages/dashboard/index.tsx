@@ -1,7 +1,5 @@
-import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
-
 const Dashboard = () => {
-  return <DashboardLayout />;
+  return <>Here’s what’s in your Library today.</>;
 };
 
 export default Dashboard;
