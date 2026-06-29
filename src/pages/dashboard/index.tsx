@@ -13,6 +13,7 @@ import {
   Tags,
 } from "lucide-react";
 import { useState } from "react";
+import api, { getApiErrorMessage } from "@/services/api";
 
 const stats = [
   {
@@ -138,6 +139,12 @@ const libraries = [
 
 const Dashboard = () => {
   const [saveBoardOpen, setSaveBoardOpen] = useState(false);
+  const [toast, setToast] = useState("");
+
+  const showToast = (message: string) => {
+    setToast(message);
+    setTimeout(() => setToast(""), 3000);
+  };
 
   return (
     <>
@@ -310,8 +317,20 @@ const Dashboard = () => {
         </section>
       </div>
 
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-[60] flex items-center gap-3 rounded-lg bg-[#6561ff] px-5! py-3! text-white shadow-lg">
+          <span className="text-sm font-medium">{toast}</span>
+        </div>
+      )}
+
       {saveBoardOpen && (
-        <SaveBoardModal onClose={() => setSaveBoardOpen(false)} />
+        <SaveBoardModal
+          onClose={() => setSaveBoardOpen(false)}
+          onSuccess={() => {
+            setSaveBoardOpen(false);
+            showToast("Resource saved to Stash!");
+          }}
+        />
       )}
     </>
   );
@@ -319,13 +338,45 @@ const Dashboard = () => {
 
 interface SaveBoardModalProps {
   onClose: () => void;
+  onSuccess: () => void;
 }
 
-function SaveBoardModal({ onClose }: SaveBoardModalProps) {
+function SaveBoardModal({ onClose, onSuccess }: SaveBoardModalProps) {
   const [type, setType] = useState(resourceTypes[0]);
   const [collection, setCollection] = useState(collections[0]);
   const [typeOpen, setTypeOpen] = useState(false);
   const [collectionOpen, setCollectionOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // form fields
+  const [url, setUrl] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await api.post("/resources", {
+        url,
+        title,
+        description,
+        tags: tags
+          .split(" ")
+          .map((t) => t.trim())
+          .filter(Boolean),
+      });
+      onSuccess();
+    } catch (err) {
+      setError(getApiErrorMessage(err));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div
@@ -335,7 +386,7 @@ function SaveBoardModal({ onClose }: SaveBoardModalProps) {
       aria-labelledby="save-board-title"
     >
       <form
-        onSubmit={(event) => event.preventDefault()}
+        onSubmit={handleSubmit}
         className="w-full max-w-[570px] rounded-2xl bg-[#f0f0ff] px-9! py-7! text-[#151515] shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
       >
         <div className="mb-7 flex items-start justify-between gap-5">
@@ -363,15 +414,21 @@ function SaveBoardModal({ onClose }: SaveBoardModalProps) {
             label="URL"
             required
             placeholder="https://instance.ixdf.com/link"
+            value={url}
+            onChange={setUrl}
           />
           <SaveBoardField
             label="Title"
             required
             placeholder="Name your resource"
+            value={title}
+            onChange={setTitle}
           />
           <SaveBoardField
             label="Description"
             placeholder="Rate resource importance for you"
+            value={description}
+            onChange={setDescription}
           />
 
           <div className="grid gap-5 sm:grid-cols-2">
@@ -381,11 +438,11 @@ function SaveBoardModal({ onClose }: SaveBoardModalProps) {
               options={resourceTypes}
               open={typeOpen}
               onToggle={() => {
-                setTypeOpen((open) => !open);
+                setTypeOpen((o) => !o);
                 setCollectionOpen(false);
               }}
-              onSelect={(nextType) => {
-                setType(nextType);
+              onSelect={(v) => {
+                setType(v);
                 setTypeOpen(false);
               }}
             />
@@ -396,11 +453,11 @@ function SaveBoardModal({ onClose }: SaveBoardModalProps) {
               options={collections}
               open={collectionOpen}
               onToggle={() => {
-                setCollectionOpen((open) => !open);
+                setCollectionOpen((o) => !o);
                 setTypeOpen(false);
               }}
-              onSelect={(nextCollection) => {
-                setCollection(nextCollection);
+              onSelect={(v) => {
+                setCollection(v);
                 setCollectionOpen(false);
               }}
             />
@@ -410,8 +467,12 @@ function SaveBoardModal({ onClose }: SaveBoardModalProps) {
             label="Tags"
             labelSuffix="(only spacing)"
             placeholder="Design Thread, Creativity"
+            value={tags}
+            onChange={setTags}
           />
         </div>
+
+        {error && <p className="mt-4 text-sm text-red-500">{error}</p>}
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
           <button
@@ -423,9 +484,10 @@ function SaveBoardModal({ onClose }: SaveBoardModalProps) {
           </button>
           <button
             type="submit"
+            disabled={loading}
             className="h-11 rounded-md bg-[#6561ff] text-sm font-semibold text-white hover:bg-[#5550f1]"
           >
-            Save to Stash
+            {loading ? "Saving..." : "Save to Stash"}
           </button>
         </div>
       </form>
@@ -438,6 +500,8 @@ interface SaveBoardFieldProps {
   labelSuffix?: string;
   placeholder: string;
   required?: boolean;
+  value: string;
+  onChange: (v: string) => void;
 }
 
 function SaveBoardField({
@@ -445,6 +509,8 @@ function SaveBoardField({
   labelSuffix,
   placeholder,
   required = false,
+  value,
+  onChange,
 }: SaveBoardFieldProps) {
   return (
     <label className="grid gap-2">
@@ -459,6 +525,8 @@ function SaveBoardField({
         className="h-11 rounded-md border border-[#aaaabb] bg-transparent px-3! text-sm text-[#222] outline-none placeholder:text-[#b7b7c2] focus:border-[#6b63ff] focus:ring-2 focus:ring-[#6b63ff]/20"
         placeholder={placeholder}
         required={required}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
     </label>
   );
