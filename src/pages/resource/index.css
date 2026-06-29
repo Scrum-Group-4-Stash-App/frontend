@@ -66,8 +66,9 @@
 .singleSearch {
   display: flex;
   gap: 4px;
-  width: 60px;
+  max-width: 160px;
   padding: 4px;
+  flex-shrink: 0;
   background-color: #d0d0ff;
 }
 
@@ -75,6 +76,10 @@
   font-size: 12px;
   font-weight: 600;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 
 .singleSearch img {
@@ -165,6 +170,9 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .linkColumn {

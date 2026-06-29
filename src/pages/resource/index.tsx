@@ -10,14 +10,29 @@ import saveIcon from "@/assets/saveIcon.svg";
 import { useEffect, useState } from "react";
 import api, { getApiErrorMessage } from "@/services/api";
 
+interface Resource {
+  _id: string;
+  title: string;
+  url: string;
+  description: string;
+  tags: string[];
+  createdAt: string;
+}
+
 const ResourcesPage = () => {
   const [tags, setTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [resources, setResources] = useState<Resource[]>([]);
+  const [loadingResources, setLoadingResources] = useState(false);
 
   useEffect(() => {
     const fetchTags = async () => {
       try {
         const res = await api.get("/resources/tags");
-        setTags(res.data.data);
+        const cleanedTags = res.data.data.map((tag: string) =>
+          tag.replace(/,\s*$/, "").trim(),
+        );
+        setTags(cleanedTags);
       } catch (err) {
         console.error(getApiErrorMessage(err));
       }
@@ -25,6 +40,67 @@ const ResourcesPage = () => {
 
     fetchTags();
   }, []);
+
+  // Fetch resources whenever selectedTags changes
+  useEffect(() => {
+    const fetchResources = async () => {
+      setLoadingResources(true);
+      try {
+        const res = await api.get("/resources", {
+          params: {
+            ...(selectedTags.length > 0 && {
+              tags: selectedTags
+                .map((t) => t.replace(/,\s*$/, "").trim())
+                .join(","),
+            }),
+            sort: "newest",
+            page: 1,
+            limit: 20,
+          },
+        });
+        setResources(res.data.data);
+      } catch (err) {
+        console.error(getApiErrorMessage(err));
+      } finally {
+        setLoadingResources(false);
+      }
+    };
+    fetchResources();
+  }, [selectedTags]);
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    );
+  };
+
+  const removeTag = (tag: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tag));
+  };
+
+  const clearAll = () => setSelectedTags([]);
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const today = new Date();
+    const isToday = date.toDateString() === today.toDateString();
+    if (isToday) {
+      return `Today, ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+    }
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const getHostname = (url: string) => {
+    try {
+      return new URL(url).hostname.replace("www.", "");
+    } catch {
+      return url;
+    }
+  };
 
   return (
     <div className="page">
@@ -42,28 +118,50 @@ const ResourcesPage = () => {
       <h3 className="searchResultheading">Search Results</h3>
       <div className="searchResultSection">
         <img src={filterIcon} alt="filterIcon" />
-        <div className="singleSearch">
-          <p>Link</p>
-          <img src={closeBlueIcon} alt="closeBlueIcon" />
-        </div>
-        <div className="singleSearch">
-          <p>pdf</p>
-          <img src={closeBlueIcon} alt="closeBlueIcon" />
-        </div>
-        <p className="claerAll">Clear all</p>
+        {selectedTags.map((tag) => (
+          <div className="singleSearch" key={tag}>
+            <p>{tag}</p>
+            <img
+              src={closeBlueIcon}
+              alt="remove"
+              onClick={() => removeTag(tag)}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+        ))}
+        {selectedTags.length > 0 && (
+          <p
+            className="claerAll"
+            onClick={clearAll}
+            style={{ cursor: "pointer" }}
+          >
+            Clear all
+          </p>
+        )}
       </div>
       <div className="resourceBody">
+        {/* Tags sidebar */}
         <div className="TagBody">
           <p className="tagHeading">Tags</p>
           <div className="TagSection">
             <div className="individualTag">
-              <input type="checkbox" />
-              <p>All type</p>
+              <input
+                type="checkbox"
+                checked={selectedTags.length === 0}
+                onChange={clearAll}
+              />
+              <p>All types</p>
             </div>
-            <div className="individualTag">
-              <input type="checkbox" />
-              <p>Links</p>
-            </div>
+            {tags.map((tag, index) => (
+              <div className="individualTag" key={index}>
+                <input
+                  type="checkbox"
+                  checked={selectedTags.includes(tag)}
+                  onChange={() => toggleTag(tag)}
+                />
+                <p>{tag}</p>
+              </div>
+            ))}
           </div>
           <div className="tagExtension">
             <img
@@ -73,33 +171,36 @@ const ResourcesPage = () => {
             />
           </div>
         </div>
+        {/* Resources list */}
         <div className="linkBody">
-          <div className="linkColumn">
-            <div className="linkSection">
-              <img src={linkIcon} alt="linkIcon" />
-              <div className="links">
-                <h4>Understanding Figma Design 2026</h4>
-                <p>Stash.com</p>
+          {loadingResources ? (
+            <p style={{ padding: "1rem", color: "#888" }}>Loading...</p>
+          ) : resources.length === 0 ? (
+            <p style={{ padding: "1rem", color: "#888" }}>
+              No resources found.
+            </p>
+          ) : (
+            resources.map((resource) => (
+              <div className="linkColumn" key={resource._id}>
+                <a
+                  className="linkSection"
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={linkIcon} alt="linkIcon" />
+                  <div className="links">
+                    <h4>{resource.title}</h4>
+                    <p>{getHostname(resource.url)}</p>
+                  </div>
+                </a>
+                <div className="linkDate">
+                  <p>{formatDate(resource.createdAt)}</p>
+                  <img src={saveIcon} alt="saveIcon" />
+                </div>
               </div>
-            </div>
-            <div className="linkDate">
-              <p>Today, 09:00 AM</p>
-              <img src={saveIcon} alt="saveIcon" />
-            </div>
-          </div>
-          <div className="linkColumn">
-            <div className="linkSection">
-              <img src={linkIcon} alt="linkIcon" />
-              <div className="links">
-                <h4>Learn to design Landing page</h4>
-                <p>Stash.com</p>
-              </div>
-            </div>
-            <div className="linkDate">
-              <p>Today, 09:00 AM</p>
-              <img src={saveIcon} alt="saveIcon" />
-            </div>
-          </div>
+            ))
+          )}
         </div>
       </div>
     </div>
