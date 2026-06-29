@@ -9,6 +9,7 @@ import NotFound from "@/pages/NotFound";
 import ResetPassword from "@/pages/ResetPassword/ResetPassword";
 import SignupPage from "@/pages/Signup/Signup";
 import Dashboard from "@/pages/dashboard";
+import DashboardPlaceholder from "@/pages/dashboard/DashboardPlaceholder";
 import { Route, Routes } from "react-router";
 
 function App() {
@@ -28,15 +29,36 @@ function App() {
         <Route path={AppRoutes.dashboard.index} element={<Dashboard />} />
         <Route
           path={AppRoutes.dashboard.allResources}
-          element={<Dashboard />}
+          element={<DashboardPlaceholder title="All resources" />}
         />
-        <Route path={AppRoutes.dashboard.collections} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.favorites} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.recents} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.shared} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.trash} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.tags} element={<Dashboard />} />
-        <Route path={AppRoutes.dashboard.profile} element={<Dashboard />} />
+        <Route
+          path={AppRoutes.dashboard.collections}
+          element={<DashboardPlaceholder title="Collections" />}
+        />
+        <Route
+          path={AppRoutes.dashboard.favorites}
+          element={<DashboardPlaceholder title="Favorites" />}
+        />
+        <Route
+          path={AppRoutes.dashboard.recents}
+          element={<DashboardPlaceholder title="Recents" />}
+        />
+        <Route
+          path={AppRoutes.dashboard.shared}
+          element={<DashboardPlaceholder title="Shared with me" />}
+        />
+        <Route
+          path={AppRoutes.dashboard.trash}
+          element={<DashboardPlaceholder title="Trash" />}
+        />
+        <Route
+          path={AppRoutes.dashboard.tags}
+          element={<DashboardPlaceholder title="Tags" />}
+        />
+        <Route
+          path={AppRoutes.dashboard.profile}
+          element={<DashboardPlaceholder title="Profile" />}
+        />
       </Route>
 
       <Route path="*" element={<NotFound />} />
