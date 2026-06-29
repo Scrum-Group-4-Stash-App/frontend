@@ -3,7 +3,7 @@ import CollectionHeader from "../../components/collection/CollectionHeader";
 import CollectionToolbar from "../../components/collection/CollectionToolbar";
 import CollectionGrid from "../../components/collection/CollectionGrid";
 import Pagination from "../../components/collection/Pagination";
-import PageLayout from "../../components/layout/PageLayout";
+// import PageLayout from "../../components/layout/PageLayout";
 import BlueFolder from "@/assets/Blue folder.svg";
 import PinkFolder from "@/assets/Pink folder.svg";
 import PurpleFolder from "@/assets/Purple folder.svg";
@@ -187,7 +187,7 @@ function CollectionsPage() {
   );
 
   return (
-    <PageLayout>
+    <div className="p-6">
       <CollectionHeader />
       <CollectionToolbar
         searchQuery={searchQuery}
@@ -203,7 +203,7 @@ function CollectionsPage() {
           onPageChange={setCurrentPage}
         />
       )}
-    </PageLayout>
+    </div>
   );
 }
 
