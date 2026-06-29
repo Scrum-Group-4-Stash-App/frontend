@@ -34,6 +34,8 @@ const ResourcesPage = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [resources, setResources] = useState<Resource[]>([]);
   const [loadingResources, setLoadingResources] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -51,7 +53,15 @@ const ResourcesPage = () => {
     fetchTags();
   }, []);
 
-  // Fetch resources whenever selectedTags changes
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setSearchQuery(searchInput.trim());
+    }, 300);
+
+    return () => window.clearTimeout(timer);
+  }, [searchInput]);
+
+  // Fetch resources whenever tags or the debounced search query changes
   useEffect(() => {
     const fetchResources = async () => {
       setLoadingResources(true);
@@ -63,6 +73,7 @@ const ResourcesPage = () => {
                 .map((t) => t.replace(/,\s*$/, "").trim())
                 .join(","),
             }),
+            ...(searchQuery && { q: searchQuery }),
             sort: "newest",
             page: 1,
             limit: 20,
@@ -76,7 +87,7 @@ const ResourcesPage = () => {
       }
     };
     fetchResources();
-  }, [selectedTags]);
+  }, [selectedTags, searchQuery]);
 
   const toggleTag = (tag: string) => {
     setSelectedTags((prev) =>
@@ -124,6 +135,8 @@ const ResourcesPage = () => {
             className="resourceInput pl-12!"
             type="text"
             placeholder="Search resources..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
       </div>
