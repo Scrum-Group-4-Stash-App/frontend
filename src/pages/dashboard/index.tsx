@@ -523,10 +523,6 @@ interface SaveBoardModalProps {
 }
 
 function SaveBoardModal({ onClose, onSuccess }: SaveBoardModalProps) {
-  const [type, setType] = useState(resourceTypes[0]);
-  const [collection, setCollection] = useState(collections[0]);
-  const [typeOpen, setTypeOpen] = useState(false);
-  const [collectionOpen, setCollectionOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
