@@ -1,6 +1,6 @@
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
   box-sizing: border-box;
 }
 
@@ -101,13 +101,12 @@ input {
 }
 
 @media (max-width: 420px) {
-  .auth-page {
-    align-items: start;
-    padding: 36px 18px;
-  }
-
   .auth-divider {
     margin-inline: 8px;
     gap: 18px;
   }
+}
+
+button {
+  cursor: pointer;
 }

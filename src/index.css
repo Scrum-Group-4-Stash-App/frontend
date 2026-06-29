@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
+:root {
+  --dash-bg: #f9f9fa;
+  --dash-surface: #ffffff;
+  --dash-surface-muted: #f3f4ff;
+  --dash-foreground: #222936;
+  --dash-muted: #6b7280;
+  --dash-border: #e5e7eb;
+  --dash-primary: #655df4;
+  --dash-primary-soft: #7a74ff;
+  --dash-sidebar: #0d0f3c;
+  --dash-sidebar-accent: #1b1f63;
+  --dash-shadow: 0 12px 28px rgba(20, 24, 40, 0.08);
 }

@@ -28,3 +28,6 @@ dist-ssr
 # ignore agent files
 .codex
 .agents
+
+
+designs
