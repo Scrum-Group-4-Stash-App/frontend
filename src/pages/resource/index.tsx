@@ -84,6 +84,7 @@ const ResourcesPage = () => {
             limit: 20,
           },
         });
+        console.log("Fetched resources:", res.data.data);
         setResources(res.data.data);
       } catch (err) {
         console.error(getApiErrorMessage(err));
@@ -252,6 +253,15 @@ const ResourcesPage = () => {
                   <div className="links">
                     <h4>{resource.title}</h4>
                     <p>{getHostname(resource.url)}</p>
+                    {resource.tags.length > 0 && (
+                      <div className="resourceTags">
+                        {resource.tags.map((tag, index) => (
+                          <span key={`${tag}-${index}`} className="resourceTag">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </a>
                 <div className="linkDate">
